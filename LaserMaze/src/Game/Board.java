@@ -24,7 +24,6 @@ public class Board {
     }
 
     public void addPiece(Token tok, int x, int y){
-        System.out.println(x + " " + y);
         grid[x-1][y-1].setOccupant(tok);
     }
 
