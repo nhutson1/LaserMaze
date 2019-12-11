@@ -8,8 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Launcher {
     public static void main(String[] args) throws FileNotFoundException {
-
-        Problem problem2 = Problem.createFromFile("src/2.txt");
+        Problem problem2 = Problem.createFromFile("2.txt");
         Board board = problem2.createBoard();
         ConsoleDisplay console = new ConsoleDisplay();
 
