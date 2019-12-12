@@ -1,7 +1,8 @@
 package Tokens;
 
 public class DoubleMirror extends Token {
-    DoubleMirror(){
-        this.direction = Facing.NONE;
+    DoubleMirror(Facing dir){
+        this.direction = dir;
+        this.charRepresentation = 'M';
     }
 }

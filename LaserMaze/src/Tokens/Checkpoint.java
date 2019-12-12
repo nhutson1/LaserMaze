@@ -1,7 +1,8 @@
 package Tokens;
 
 public class Checkpoint extends Token {
-    Checkpoint(){
-        this.direction = Facing.NONE;
+    Checkpoint(Facing dir){
+        this.direction = dir;
+        this.charRepresentation = 'P';
     }
 }

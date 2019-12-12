@@ -1,16 +1,22 @@
 package Launcher;
 
 import Game.Board;
+import Tokens.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Problem {
     private String solutionText;
+    private static Board board;
 
     static Problem createFromFile(String str){
         Problem problem = new Problem();
+        board = new Board();
 
         Scanner scanner = null;
         try {
@@ -21,24 +27,63 @@ public class Problem {
 
         String line;
         String[] tokens;
-        while(scanner.hasNextLine()) {
-            line = scanner.nextLine();
-            tokens = line.split("|");
 
-            for(String token : tokens){
-                switch (token) {
+        int j = 0; // row index
+        scanner.nextLine(); // skip header
+        scanner.nextLine();
+        while(scanner.hasNextLine() && j < 5) { // read problem
+            line = scanner.nextLine();
+            tokens = line.split("\\|");
+            List<String> list = new LinkedList<>(Arrays.asList(tokens));
+            list.remove(0); // remove extra index added by regex
+
+            for(String token : list){
+                Facing dir = Facing.NONE;
+                Token curToken = null;
+                switch(token.charAt(1)){ // determine direction
+                    case 'N':
+                        dir = Facing.NORTH;
+                        break;
+                    case 'S':
+                        dir = Facing.SOUTH;
+                        break;
+                    case 'W':
+                        dir = Facing.WEST;
+                        break;
+                    case 'E':
+                        dir = Facing.EAST;
+                        break;
                     default:
-                        System.out.print(token);
                         break;
                 }
+
+                switch (token.charAt(0)) { // determine game token
+                    case 'L':
+                        curToken = new Laser(dir);
+                        board.setLaser((Laser) curToken);
+                        break;
+                    case 'T':
+                        curToken = new Target(dir);
+                        break;
+                    case 'Z':
+                        curToken = new Target(dir);
+                        ((Target) curToken).setLit(true);
+                        break;
+                    case ' ':
+                        curToken = new Empty();
+                        break;
+                    default:
+                        break;
+                }
+                board.addPiece(curToken, list.indexOf(token), j);
             }
-            System.out.println();
+            j++;
         }
         return problem;
     }
 
     public Board createBoard(){
-        return new Board();
+        return board;
     }
 
     public String getSolutionText(){

@@ -13,10 +13,12 @@ public class Launcher {
         ConsoleDisplay console = new ConsoleDisplay();
 
         board.setDisplay(console);
-        board.addPiece(new Target(Facing.EAST), 3, 4);
+        board.addPiece(new Target(Facing.EAST), 4, 3);
         board.getLaser().setOn(true);
+        board.getLaser().setDirection(Facing.NORTH);
         board.draw();
 
+        System.out.println(console.drawBoardToString(board));
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
             System.out.println("*** SUCCESS ***");
         else
