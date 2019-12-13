@@ -39,7 +39,7 @@ public class Problem {
 
             for(String token : list){
                 Facing dir = Facing.NONE;
-                Token curToken = null;
+                Token curToken = new Empty();
                 switch(token.charAt(1)){ // determine direction
                     case 'N':
                         dir = Facing.NORTH;
@@ -52,6 +52,9 @@ public class Problem {
                         break;
                     case 'E':
                         dir = Facing.EAST;
+                        break;
+                    case '?':
+                        dir = Facing.NONE;
                         break;
                     default:
                         break;
@@ -68,6 +71,18 @@ public class Problem {
                     case 'Z':
                         curToken = new Target(dir);
                         ((Target) curToken).setLit(true);
+                        break;
+                    case 'B':
+                        curToken = new BeamSplitter(dir);
+                        break;
+                    case 'M':
+                        curToken = new DoubleMirror(dir);
+                        break;
+                    case 'P':
+                        curToken = new Checkpoint(dir);
+                        break;
+                    case 'K':
+                        curToken = new CellBlocker();
                         break;
                     case ' ':
                         curToken = new Empty();

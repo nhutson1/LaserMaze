@@ -1,7 +1,7 @@
 package Tokens;
 
 public class CellBlocker extends Token {
-    CellBlocker(){
+    public CellBlocker(){
         this.direction = Facing.NONE;
         this.charRepresentation = 'K';
     }
