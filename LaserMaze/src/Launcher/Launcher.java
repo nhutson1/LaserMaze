@@ -19,6 +19,7 @@ public class Launcher {
         board.draw();
 
         System.out.println(console.drawBoardToString(board));
+        System.out.println(problem2.getSolutionText());
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
             System.out.println("*** SUCCESS ***");
         else

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Problem {
-    private String solutionText;
+    private static String solutionText;
     private static Board board;
 
     static Problem createFromFile(String str){
@@ -79,6 +79,15 @@ public class Problem {
             }
             j++;
         }
+
+        //read solution
+        scanner.nextLine(); // skip header
+        solutionText = "";
+        while(scanner.hasNextLine()) { // read problem
+            solutionText += scanner.nextLine();
+            solutionText += "\n";
+        }
+
         return problem;
     }
 
